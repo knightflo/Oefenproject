@@ -1,0 +1,63 @@
+# FDD: Platformer
+
+## General Description
+
+In platformer, the player has to reach the goal by passing obstacles. The player can transform itself into black or white to go to the goal. The goal of the game is to complete all the levels.
+
+## Functional requirements
+
+### Player
+- The player can move left by pressing A
+- The player can move right by pressing D
+- The player can jump by pressing the space bar
+- The player can Transform in black and white by pressing T
+- If the player transforms, they will appear upside down of itself in the opposite background color
+
+*** Progression
+- If the player completes a level. A new level will be unlocked
+- During the play of the level. The player can get bonus stars. 
+- New levels will increase difficulty or add new mechanics
+- The player can finish the level by entering a portal.
+
+*** Mechanics
+- A button which moves a part to a specific place.
+- Paint bucket which can be used on rusty parts. This will make it black or white and can be walked over.
+- A button which turns a part to the opposite color.
+- Moving platforms.
+
+*** Obstacles
+- Spikes that kills the player and restarts the level.
+- Rusty parts which cant be walked over or walked through.
+
+*** UI system
+
+HUD displays:
+- The items and how much they have of it
+- A pauze button that can be used to pauze the game
+- The amount of attempts they use to complete the level
+
+When the player opens the pauze menu:
+- The game freezes
+- The user can choose to continue or to return to main menu.
+
+Level selector:
+- The levels are shown on the screen.
+- A level is locked if the previous level has not been completed.
+- The bonus stars are shown on the screen if the player has collected it before completing the level.
+- If the player has enough bonus stars. A bonus level is unlocked.
+- The total amount of bonus stars collected will be shown on the screen.
+
+
+## Non functional requirements:
+
+### Perspective
+- The game will be a 2D game.
+
+### Performance
+- The game must maintain a stable framerate. This can be done by adding a loading screen if switching scenes will take long.
+
+### Visual Feedback
+- The game must have a black and white theme.
+- A splash effect will occur when entering the portal.
+- The game has black and white firefly particles on the whole screen.
+- When collecting a item on a level, it zooms out and disappears.
