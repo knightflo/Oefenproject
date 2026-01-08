@@ -1,17 +1,24 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.UI.Image;
 
 public class Player_Movement : MonoBehaviour
 {
     private bool isMovingLeft;
     private bool isMovingRight;
+    
 
     [SerializeField] private float movementSpeed;
 
     [SerializeField] private Rigidbody2D rb;
 
-    [SerializeField] private LayerMask groundLayer;
+    public LayerMask groundLayer;
+
+    [NonSerialized] public bool isGrounded;
+
+    [NonSerialized] public float raycastDistance = 0.6f;
+    public float Jumpdistance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +40,8 @@ public class Player_Movement : MonoBehaviour
         {
             rb.linearVelocityX = 0;
         }
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer).collider != null;
+        Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.red);
     }
 
     public void SetMovementLeft(InputAction.CallbackContext ctx)
@@ -63,17 +72,10 @@ public class Player_Movement : MonoBehaviour
     {
         if (!ctx.started) return;
 
-        Debug.Log("jump start");
-        Vector2 origin = transform.position;
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, 0.6f, groundLayer);
-
-        Debug.DrawRay(origin, Vector2.down * 0.6f, Color.red);
-
-        if (hit.collider != null)
+        if (isGrounded)
         {
-            Debug.Log("jumping");
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 5f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Jumpdistance);
         }
     }
-
+    
 }
