@@ -10,23 +10,25 @@ public class Player_Movement : MonoBehaviour
     
 
     [SerializeField] private float movementSpeed;
-
     [SerializeField] private Rigidbody2D rb;
 
     public LayerMask groundLayer;
-
     [NonSerialized] public bool isGrounded;
-
     [NonSerialized] public float raycastDistance = 0.6f;
     public float Jumpdistance;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
 
-    }
 
     // Update is called once per frame
     void Update()
+    {
+        
+        HandleMovement();
+
+        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer).collider != null;
+        Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.red);
+    }
+
+    private void HandleMovement()
     {
         if (isMovingLeft)
         {
@@ -40,9 +42,8 @@ public class Player_Movement : MonoBehaviour
         {
             rb.linearVelocityX = 0;
         }
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, groundLayer).collider != null;
-        Debug.DrawRay(transform.position, Vector2.down * raycastDistance, Color.red);
     }
+
 
     public void SetMovementLeft(InputAction.CallbackContext ctx)
     {

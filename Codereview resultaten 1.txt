@@ -1,0 +1,9 @@
+Gebruik altijd eerst private until nodig in andere plekken
+
+lege functies weg gooien. Vanaf begin
+
+enter gooien als het over iets anders ga.
+
+Gooi in 1 functie als het over meerdere code gaat in update
+
+om leesbaar te hebben. Maak elke eerste letter van woord een Hoofdletter.

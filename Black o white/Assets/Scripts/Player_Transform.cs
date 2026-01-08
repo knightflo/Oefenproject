@@ -8,7 +8,7 @@ public class Player_Transform : MonoBehaviour
     private bool isUpsideDown = false;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Player_Movement playerMovement;
-    [SerializeField] private Rigidbody2D RB;
+    [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private Transform transformBlack;
     [SerializeField] private Transform transformWhite;
@@ -19,17 +19,6 @@ public class Player_Transform : MonoBehaviour
     private void Awake()
     {
         GetallCollidersfromLayers();
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void Transform(InputAction.CallbackContext ctx)
@@ -56,7 +45,7 @@ public class Player_Transform : MonoBehaviour
         {
             colliders.isTrigger = !colliders.isTrigger;
         }
-        RB.gravityScale = -RB.gravityScale;
+        rb.gravityScale = -rb.gravityScale;
         isUpsideDown = !isUpsideDown;
         playerMovement.raycastDistance = -playerMovement.raycastDistance;
         playerMovement.Jumpdistance = -playerMovement.Jumpdistance;
