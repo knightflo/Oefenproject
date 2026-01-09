@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 
 public class Player_Transform : MonoBehaviour
@@ -13,12 +14,11 @@ public class Player_Transform : MonoBehaviour
     [SerializeField] private Transform transformBlack;
     [SerializeField] private Transform transformWhite;
 
-    private List<Collider2D> Blackcolliders = new List<Collider2D>();
-    private List<Collider2D> Whitecolliders = new List<Collider2D>();
-
+    [SerializeField] private Collider2D BlackCollider;
+    [SerializeField] private Collider2D WhiteCollider;
     private void Awake()
     {
-        GetallCollidersfromLayers();
+        WhiteCollider.isTrigger = false;
     }
 
     public void Transform(InputAction.CallbackContext ctx)
@@ -37,34 +37,14 @@ public class Player_Transform : MonoBehaviour
             playerMovement.groundLayer = LayerMask.GetMask("GroundBlack");
         }
 
-        foreach (Collider2D colliders in Whitecolliders)
-        {
-            colliders.isTrigger = !colliders.isTrigger;
-        }
-        foreach (Collider2D colliders in Blackcolliders)
-        {
-            colliders.isTrigger = !colliders.isTrigger;
-        }
+        BlackCollider.isTrigger = !BlackCollider.isTrigger;
+        WhiteCollider.isTrigger = !WhiteCollider.isTrigger;
         rb.gravityScale = -rb.gravityScale;
         isUpsideDown = !isUpsideDown;
         playerMovement.raycastDistance = -playerMovement.raycastDistance;
         playerMovement.Jumpdistance = -playerMovement.Jumpdistance;
     }
-    private void GetallCollidersfromLayers()
-    {
-        Collider2D[] colliders = Object.FindObjectsByType<Collider2D>(FindObjectsSortMode.None);
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.gameObject.layer == 6)
-            {
-                Blackcolliders.Add(collider);
-            }
-            if (collider.gameObject.layer == 7)
-            {
-                Whitecolliders.Add(collider);
-            }
-        }
-    }
+    
     public void ToggleColor()
     {
         if (!isUpsideDown)
