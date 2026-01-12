@@ -9,7 +9,7 @@ public class Player_Transform : MonoBehaviour
     private bool isUpsideDown = false;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Player_Movement playerMovement;
-    [SerializeField] private Player_Death playerDeath;
+    [SerializeField] private Player_Collide playerCollide;
     [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private Transform transformBlack;
@@ -41,13 +41,13 @@ public class Player_Transform : MonoBehaviour
         {
             transform.position = transformWhite.position;
             groundLayer = LayerMask.GetMask("GroundWhite");
-            playerDeath.spikeTag = "SpikeWhite";
+            playerCollide.spikeTag = "SpikeWhite";
         }
         else
         {
             transform.position = transformBlack.position;
             groundLayer = LayerMask.GetMask("GroundBlack");
-            playerDeath.spikeTag = "SpikeBlack";
+            playerCollide.spikeTag = "SpikeBlack";
         }
 
         blackCollider.isTrigger = !blackCollider.isTrigger;
