@@ -15,33 +15,43 @@ public class Player_Transform : MonoBehaviour
     [SerializeField] private Transform transformBlack;
     [SerializeField] private Transform transformWhite;
 
-    [SerializeField] private Collider2D BlackCollider;
-    [SerializeField] private Collider2D WhiteCollider;
+    [SerializeField] private Collider2D blackCollider;
+    [SerializeField] private Collider2D whiteCollider;
+
+    [SerializeField] private Transform raycastLeft;
+    [SerializeField] private Transform raycastRight;
+
+    [SerializeField] private LayerMask groundLayer;
     private void Awake()
     {
-        WhiteCollider.isTrigger = false;
+        whiteCollider.isTrigger = false;
     }
 
+    private bool isGrounded()
+    {
+        return Physics2D.Raycast(raycastLeft.position, Vector2.down, playerMovement.raycastDistance, groundLayer).collider != null
+            && Physics2D.Raycast(raycastRight.position, Vector2.down, playerMovement.raycastDistance, groundLayer).collider != null;
+    }
     public void Transform(InputAction.CallbackContext ctx)
     {
-        if (!ctx.started || !playerMovement.isGrounded) return;
+        if (!ctx.started || !isGrounded()) return;
 
         ToggleColor();
         if (!isUpsideDown) 
         {
             transform.position = transformWhite.position;
-            playerMovement.groundLayer = LayerMask.GetMask("GroundWhite");
+            groundLayer = LayerMask.GetMask("GroundWhite");
             playerDeath.spikeTag = "SpikeWhite";
         }
         else
         {
             transform.position = transformBlack.position;
-            playerMovement.groundLayer = LayerMask.GetMask("GroundBlack");
+            groundLayer = LayerMask.GetMask("GroundBlack");
             playerDeath.spikeTag = "SpikeBlack";
         }
 
-        BlackCollider.isTrigger = !BlackCollider.isTrigger;
-        WhiteCollider.isTrigger = !WhiteCollider.isTrigger;
+        blackCollider.isTrigger = !blackCollider.isTrigger;
+        whiteCollider.isTrigger = !whiteCollider.isTrigger;
         rb.gravityScale = -rb.gravityScale;
         isUpsideDown = !isUpsideDown;
         playerMovement.raycastDistance = -playerMovement.raycastDistance;
