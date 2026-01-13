@@ -7,7 +7,8 @@ public class Player_Movement : MonoBehaviour
 {
     private bool isMovingLeft;
     private bool isMovingRight;
-    
+
+    [NonSerialized] public bool canMove = true;
 
     [SerializeField] private float movementSpeed;
     [SerializeField] private Rigidbody2D rb;
@@ -35,18 +36,26 @@ public class Player_Movement : MonoBehaviour
 
     private void HandleMovement()
     {
-        if (isMovingLeft)
+        if (canMove)
         {
-            rb.linearVelocityX = -1 * movementSpeed;
-        }
-        else if (isMovingRight)
-        {
-            rb.linearVelocityX = +1 * movementSpeed;
+            if (isMovingLeft)
+            {
+                rb.linearVelocityX = -1 * movementSpeed;
+            }
+            else if (isMovingRight)
+            {
+                rb.linearVelocityX = +1 * movementSpeed;
+            }
+            else
+            {
+                rb.linearVelocityX = 0;
+            }
         }
         else
         {
             rb.linearVelocityX = 0;
         }
+        
     }
 
 
