@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,7 +17,7 @@ public class Player_Collide : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Finish"))
         {
-            Level_Manager.instance.finishLevel();
+            Level_Manager.instance.FinishLevel();
         }
         if (collision.gameObject.CompareTag("Rust"))
         {
@@ -33,6 +34,6 @@ public class Player_Collide : MonoBehaviour
     }
     private void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UI_Manager.instance.ReloadScene();
     }
 }

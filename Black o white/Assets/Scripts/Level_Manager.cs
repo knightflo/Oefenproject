@@ -20,7 +20,7 @@ public class Level_Manager : MonoBehaviour
         }
     }
 
-    public void finishLevel()
+    public void FinishLevel()
     {
         level++;
         Debug.Log("finished level!");

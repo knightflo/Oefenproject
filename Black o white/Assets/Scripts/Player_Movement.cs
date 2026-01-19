@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.UI.Image;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -20,7 +19,6 @@ public class Player_Movement : MonoBehaviour
 
     [SerializeField] private Transform raycastLeft;
     [SerializeField] private Transform raycastRight;
-
 
     // Update is called once per frame
     void Update()
@@ -55,9 +53,7 @@ public class Player_Movement : MonoBehaviour
         {
             rb.linearVelocityX = 0;
         }
-        
     }
-
 
     public void SetMovementLeft(InputAction.CallbackContext ctx)
     {
@@ -92,5 +88,4 @@ public class Player_Movement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Jumpdistance);
         }
     }
-    
 }
