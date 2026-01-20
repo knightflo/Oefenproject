@@ -53,6 +53,7 @@ public class Player_Transform : MonoBehaviour
         blackCollider.isTrigger = !blackCollider.isTrigger;
         whiteCollider.isTrigger = !whiteCollider.isTrigger;
         rb.gravityScale = -rb.gravityScale;
+        rb.linearVelocityY = 0;
         isUpsideDown = !isUpsideDown;
         playerMovement.raycastDistance = -playerMovement.raycastDistance;
         playerMovement.Jumpdistance = -playerMovement.Jumpdistance;

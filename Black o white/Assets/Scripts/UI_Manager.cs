@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -21,6 +22,11 @@ public class UI_Manager : MonoBehaviour
     private float paintAmount;
     [SerializeField] private GameObject paint;
     private bool isPaintSelected = false;
+
+    private bool isHidden = false;
+    [SerializeField] private UnityEvent hideUI;
+    [SerializeField] private UnityEvent showUI;
+    [SerializeField] private TextMeshProUGUI uiButton;
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -50,6 +56,7 @@ public class UI_Manager : MonoBehaviour
     public void Continue()
     {
         Time.timeScale = 1;
+        
     }
 
     public void TogglePauze(InputAction.CallbackContext ctx)
@@ -112,5 +119,21 @@ public class UI_Manager : MonoBehaviour
             Destroy(gameobject);
         }
         
+    }
+
+    public void ToggleUI()
+    {
+        if (!isHidden)
+        {
+            hideUI.Invoke();
+            uiButton.text = "Show UI";
+        }
+        if (isHidden)
+        {
+            showUI.Invoke();
+            uiButton.text = "Hide UI";
+        }
+
+        isHidden = !isHidden;
     }
 }
