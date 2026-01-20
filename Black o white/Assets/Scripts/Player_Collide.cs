@@ -21,17 +21,19 @@ public class Player_Collide : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Rust"))
         {
-            playerMovement.canMove = false;
+            Die();
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Rust"))
+        if (collision.gameObject.CompareTag("Paint"))
         {
-            playerMovement.canMove = true;
+            UI_Manager.instance.PaintCollect();
+            Destroy(collision.gameObject);
         }
     }
+
     private void Die()
     {
         UI_Manager.instance.ReloadScene();
